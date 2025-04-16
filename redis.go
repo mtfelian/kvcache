@@ -10,14 +10,14 @@ import (
 )
 
 // NewRedis creates new redis-based cacher
-func NewRedis(redisClient *redis.Client, ttl time.Duration, prefix string) *Redis {
+func NewRedis(redisClient redis.UniversalClient, ttl time.Duration, prefix string) *Redis {
 	return &Redis{cli: redisClient, ttl: ttl, prefix: prefix}
 }
 
 // Redis represents in-memory cacher
 type Redis struct {
 	sync.Mutex
-	cli    *redis.Client
+	cli    redis.UniversalClient
 	ttl    time.Duration
 	prefix string
 }
